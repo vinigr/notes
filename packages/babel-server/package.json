@@ -1,0 +1,19 @@
+{
+  "name": "@todo/babel-server",
+  "version": "0.0.1",
+  "main": "index.js",
+  "dependencies": {
+    "@babel/cli": "^7.7.7",
+    "@babel/core": "^7.7.7",
+    "@babel/node": "^7.7.7",
+    "@babel/plugin-proposal-async-generator-functions": "^7.7.4",
+    "@babel/plugin-proposal-class-properties": "^7.7.4",
+    "@babel/plugin-proposal-export-default-from": "7.7.4",
+    "@babel/plugin-proposal-export-namespace-from": "7.7.4",
+    "@babel/plugin-proposal-object-rest-spread": "^7.7.7",
+    "@babel/preset-env": "^7.7.7",
+    "@babel/preset-react": "^7.7.4",
+    "@babel/preset-typescript": "^7.7.7",
+    "babel-plugin-idx": "^2.4.0"
+  }
+}
