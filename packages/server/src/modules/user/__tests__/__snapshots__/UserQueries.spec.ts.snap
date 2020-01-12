@@ -1,0 +1,77 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`UserType queries should query all users 1`] = `
+Object {
+  "data": Object {
+    "users": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "email": "EMPTY",
+            "id": "FROZEN-ID",
+            "name": "Normal user 5",
+          },
+        },
+        Object {
+          "node": Object {
+            "email": "EMPTY",
+            "id": "FROZEN-ID",
+            "name": "Normal user 4",
+          },
+        },
+        Object {
+          "node": Object {
+            "email": "EMPTY",
+            "id": "FROZEN-ID",
+            "name": "Normal user 3",
+          },
+        },
+        Object {
+          "node": Object {
+            "email": "EMPTY",
+            "id": "FROZEN-ID",
+            "name": "Normal user 2",
+          },
+        },
+        Object {
+          "node": Object {
+            "email": "EMPTY",
+            "id": "FROZEN-ID",
+            "name": "Normal user 1",
+          },
+        },
+      ],
+    },
+  },
+}
+`;
+
+exports[`UserType queries should query an user 1`] = `
+Object {
+  "data": Object {
+    "user": Object {
+      "email": "EMPTY",
+      "id": "FROZEN-ID",
+      "name": "Normal user NaN",
+    },
+  },
+}
+`;
+
+exports[`UserType queries should search all users 1`] = `
+Object {
+  "data": Object {
+    "users": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "email": "EMPTY",
+            "id": "FROZEN-ID",
+            "name": "grama",
+          },
+        },
+      ],
+    },
+  },
+}
+`;
