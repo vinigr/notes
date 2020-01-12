@@ -4,12 +4,15 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start": "webpack --env.mode=dev"
+    "start": "webpack --env.mode=dev",
+    "test": "jest --coverage --forceExit"
   },
   "dependencies": {
     "@entria/graphql-mongoose-loader": "^4.3.0",
     "@koa/router": "^8.0.5",
+    "@todo/babel-jest": "*",
     "bcryptjs": "^2.4.3",
+    "core-js": "^3.6.3",
     "dataloader": "^2.0.0",
     "dotenv-safe": "^8.2.0",
     "env-var": "^5.2.0",
@@ -29,7 +32,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.7.7",
-    "@todo/babel-server": "*",
+    "@todo/babel-jest": "*",
     "@types/bcryptjs": "^2.4.2",
     "@types/dotenv-safe": "^8.1.0",
     "@types/graphql-relay": "^0.4.11",
