@@ -1,0 +1,13 @@
+{
+  "name": "@todo/babel-jest",
+  "version": "1.0.0",
+  "dependencies": {
+    "babel-jest": "^24.9.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.8.0"
+  },
+  "peerDependencies": {
+    "@babel/core": "^7.8.0"
+  }
+}
