@@ -52,7 +52,7 @@ Object {
     "user": Object {
       "email": "EMPTY",
       "id": "FROZEN-ID",
-      "name": "Normal user NaN",
+      "name": "Normal user 1",
     },
   },
 }
