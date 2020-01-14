@@ -2,8 +2,10 @@ import { GraphQLObjectType, GraphQLString, GraphQLNonNull, GraphQLID } from 'gra
 import { connectionArgs, fromGlobalId } from 'graphql-relay';
 
 import UserType, { UserConnection } from '../modules/user/UserType';
+import CategoryType, { CategoryConnection } from '../modules/category/CategoryType';
+
 import { nodeField } from '../interface/NodeInterface';
-import { UserLoader } from '../loader';
+import { UserLoader, CategoryLoader } from '../loader';
 
 export default new GraphQLObjectType({
   name: 'Query',
@@ -26,6 +28,18 @@ export default new GraphQLObjectType({
         return UserLoader.load(context, id);
       },
     },
+    category: {
+      type: CategoryType,
+      args: {
+        id: {
+          type: GraphQLNonNull(GraphQLID),
+        },
+      },
+      resolve: (_, args, context) => {
+        const { id } = fromGlobalId(args.id);
+        return CategoryLoader.load(context, id);
+      },
+    },
     users: {
       type: UserConnection.connectionType,
       args: {
@@ -35,6 +49,16 @@ export default new GraphQLObjectType({
         },
       },
       resolve: (_, args, context) => UserLoader.loadUsers(context, args),
+    },
+    categories: {
+      type: CategoryConnection.connectionType,
+      args: {
+        ...connectionArgs,
+        search: {
+          type: GraphQLString,
+        },
+      },
+      resolve: (_, args, context) => CategoryLoader.loadCategories(context, args),
     },
   }),
 });
