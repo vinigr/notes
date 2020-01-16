@@ -18,11 +18,17 @@ export default class Category {
 
   createdBy: Types.ObjectId;
 
+  createdAt: Date;
+
+  updatedAt: Date;
+
   constructor(data: ICategory, {}: GraphQLContext) {
     this.id = data._id;
     this._id = data._id;
     this.name = data.name;
     this.createdBy = data.createdBy;
+    this.createdAt = data.createdAt;
+    this.updatedAt = data.updatedAt;
   }
 }
 

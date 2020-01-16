@@ -25,6 +25,8 @@ const schema = new mongoose.Schema(
 export interface ICategory extends Document {
   name: string;
   createdBy: mongoose.Schema.Types.ObjectId;
+  createdAt: Date;
+  updatedAt: Date;
 }
 
 const CategoryModel: Model<ICategory> = mongoose.model('Category', schema);

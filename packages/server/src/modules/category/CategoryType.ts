@@ -37,7 +37,7 @@ const CategoryType = registerType(
       },
       updatedAt: {
         type: GraphQLString,
-        resolve: ({ createdAt }) => (createdAt ? createdAt.toISOString() : null),
+        resolve: ({ updatedAt }) => (updatedAt ? updatedAt.toISOString() : null),
       },
     }),
     interfaces: () => [nodeInterface],

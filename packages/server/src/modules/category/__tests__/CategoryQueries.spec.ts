@@ -1,5 +1,5 @@
 import { graphql } from 'graphql';
-import { toGlobalId, fromGlobalId } from 'graphql-relay';
+import { toGlobalId } from 'graphql-relay';
 
 import { schema } from '../../../schema';
 
@@ -50,7 +50,7 @@ it('should query an category and not return createdBy if created by what others 
   const { data } = result;
 
   expect(result.errors).toBeUndefined();
-  expect(data.category.createdBy).toBeNull();
+  expect(data?.category.createdBy).toBeNull();
 });
 
 it('should query an category created by me', async () => {
@@ -84,7 +84,7 @@ it('should query an category created by me', async () => {
   const { data } = result;
 
   expect(result.errors).toBeUndefined();
-  expect(data.category.createdBy._id).toBe(category.createdBy.toString());
+  expect(data?.category.createdBy._id).toBe(category.createdBy.toString());
 });
 
 it('should query all categories created by me', async () => {
@@ -112,7 +112,7 @@ it('should query all categories created by me', async () => {
   const context = await getContext({ user });
 
   const result = await graphql(schema, query, rootValue, context);
-  const { edges } = result.data.categoriesByCreator;
+  const { edges } = result.data?.categoriesByCreator;
 
   expect(result.errors).toBeUndefined();
   expect(edges).toHaveLength(2);
@@ -174,7 +174,7 @@ it('should search all categories created by me', async () => {
   const context = await getContext({ user });
   const result = await graphql(schema, query, rootValue, context);
 
-  const { edges } = result.data.categoriesByCreator;
+  const { edges } = result.data?.categoriesByCreator;
 
   expect(result.errors).toBeUndefined();
   expect(edges).toHaveLength(2);
@@ -205,7 +205,7 @@ it('should query all categories', async () => {
   const context = await getContext();
 
   const result = await graphql(schema, query, rootValue, context);
-  const { edges } = result.data.categories;
+  const { edges } = result.data?.categories;
 
   expect(result.errors).toBeUndefined();
   expect(edges).toHaveLength(3);
