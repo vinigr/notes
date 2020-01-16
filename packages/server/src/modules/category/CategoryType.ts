@@ -14,7 +14,7 @@ const CategoryType = registerType(
       id: globalIdField('Category'),
       _id: {
         type: GraphQLString,
-        resolve: category => category._id,
+        resolve: category => category._id.toString(),
       },
       name: {
         type: GraphQLString,
@@ -24,13 +24,20 @@ const CategoryType = registerType(
         type: UserType,
         resolve: (obj, _, context) => {
           const { user } = context;
-
           if (obj.createdBy.equals(user._id)) {
             return UserLoader.load(context, user._id);
           }
 
           return null;
         },
+      },
+      createdAt: {
+        type: GraphQLString,
+        resolve: ({ createdAt }) => (createdAt ? createdAt.toISOString() : null),
+      },
+      updatedAt: {
+        type: GraphQLString,
+        resolve: ({ createdAt }) => (createdAt ? createdAt.toISOString() : null),
       },
     }),
     interfaces: () => [nodeInterface],

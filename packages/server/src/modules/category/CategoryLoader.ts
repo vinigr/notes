@@ -63,7 +63,7 @@ type CategoryArgs = ConnectionArguments & {
 };
 
 export const loadCategoriesByCreator = async (context: GraphQLContext, args: CategoryArgs) => {
-  let where = { createdBy: context.user._id };
+  let where = { createdBy: context.user?._id };
   if (args.search) {
     where = Object.assign(where, { name: { $regex: new RegExp(`^${args.search}`, 'ig') } });
   }
