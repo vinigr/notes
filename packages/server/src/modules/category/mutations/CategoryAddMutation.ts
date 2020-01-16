@@ -12,7 +12,7 @@ interface AddCategoryArgs {
 }
 
 const mutation = mutationWithClientMutationId({
-  name: 'AddCategory',
+  name: 'CategoryAdd',
   inputFields: {
     name: {
       type: GraphQLNonNull(GraphQLString),

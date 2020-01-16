@@ -21,7 +21,7 @@ it('should not add category if user not authenticated', async () => {
     mutation M(
       $name: String!
     ) {
-      AddCategory(input: {
+      CategoryAdd(input: {
         name: $name
       }) {
         category {
@@ -44,8 +44,8 @@ it('should not add category if user not authenticated', async () => {
   const { data } = result;
 
   expect(result.errors).toBeUndefined();
-  expect(data.AddCategory.category).toBeNull();
-  expect(data.AddCategory.error).toBe('User not authenticated');
+  expect(data.CategoryAdd.category).toBeNull();
+  expect(data.CategoryAdd.error).toBe('User not authenticated');
 });
 
 it('should add category', async () => {
@@ -54,7 +54,7 @@ it('should add category', async () => {
   // language graphQL
   const query = `
     mutation M($name: String!) {
-      AddCategory(input: {name: $name}) {
+      CategoryAdd(input: {name: $name}) {
         category {
           node {
             name
@@ -72,10 +72,8 @@ it('should add category', async () => {
   };
 
   const result = await graphql(schema, query, rootQuery, context, variables);
-  const { AddCategory } = result.data;
-
-  console.log(result.data);
+  const { CategoryAdd } = result.data;
 
   expect(result.errors).toBeUndefined();
-  expect(AddCategory.category.node.name).toBe('test');
+  expect(CategoryAdd.category.node.name).toBe('test');
 });

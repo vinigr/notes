@@ -1,3 +1,5 @@
-import AddCategory from './AddCategoryMutation';
+import CategoryAdd from './CategoryAddMutation';
+import CategoryDelete from './CategoryDeleteMutation';
+import CategoryEdit from './CategoryEditMutation';
 
-export default { AddCategory };
+export default { CategoryAdd, CategoryDelete, CategoryEdit };
