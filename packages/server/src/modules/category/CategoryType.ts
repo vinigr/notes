@@ -3,6 +3,8 @@ import { globalIdField } from 'graphql-relay';
 
 import { connectionDefinitions } from '../../connection/CustomConnectionType';
 import { registerType, nodeInterface } from '../../interface/NodeInterface';
+import UserType from '../user/UserType';
+import { UserLoader } from '../../loader';
 
 const CategoryType = registerType(
   new GraphQLObjectType({
@@ -19,11 +21,15 @@ const CategoryType = registerType(
         resolve: category => category.name,
       },
       createdBy: {
-        type: GraphQLString,
-        resolve: (obj, args, context) => {
+        type: UserType,
+        resolve: (obj, _, context) => {
           const { user } = context;
 
-          return obj.createdBy.equals(user._id);
+          if (obj.createdBy.equals(user._id)) {
+            return UserLoader.load(context, user._id);
+          }
+
+          return null;
         },
       },
     }),

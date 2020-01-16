@@ -50,6 +50,22 @@ export default new GraphQLObjectType({
       },
       resolve: (_, args, context) => UserLoader.loadUsers(context, args),
     },
+    categoriesByCreator: {
+      type: CategoryConnection.connectionType,
+      args: {
+        ...connectionArgs,
+        search: {
+          type: GraphQLString,
+        },
+      },
+      resolve: (_, args, context) => {
+        if (!context.user) {
+          return null;
+        }
+
+        return CategoryLoader.loadCategoriesByCreator(context, args);
+      },
+    },
     categories: {
       type: CategoryConnection.connectionType,
       args: {

@@ -62,6 +62,22 @@ type CategoryArgs = ConnectionArguments & {
   search?: string;
 };
 
+export const loadCategoriesByCreator = async (context: GraphQLContext, args: CategoryArgs) => {
+  let where = { createdBy: context.user._id };
+  if (args.search) {
+    where = Object.assign(where, { name: { $regex: new RegExp(`^${args.search}`, 'ig') } });
+  }
+
+  const categories = CategoryModel.find(where, { _id: 1 }).sort({ createdAt: -1 });
+
+  return connectionFromMongoCursor({
+    cursor: categories,
+    context,
+    args,
+    loader: load,
+  });
+};
+
 export const loadCategories = async (context: GraphQLContext, args: CategoryArgs) => {
   const where = args.search ? { name: { $regex: new RegExp(`^${args.search}`, 'ig') } } : {};
   const categories = CategoryModel.find(where, { _id: 1 }).sort({ createdAt: -1 });
