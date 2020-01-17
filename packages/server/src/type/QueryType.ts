@@ -3,9 +3,10 @@ import { connectionArgs, fromGlobalId } from 'graphql-relay';
 
 import UserType, { UserConnection } from '../modules/user/UserType';
 import CategoryType, { CategoryConnection } from '../modules/category/CategoryType';
+import NoteType, { NoteConnection } from '../modules/note/NoteType';
 
 import { nodeField } from '../interface/NodeInterface';
-import { UserLoader, CategoryLoader } from '../loader';
+import { UserLoader, CategoryLoader, NoteLoader } from '../loader';
 
 export default new GraphQLObjectType({
   name: 'Query',
@@ -40,6 +41,18 @@ export default new GraphQLObjectType({
         return CategoryLoader.load(context, id);
       },
     },
+    note: {
+      type: NoteType,
+      args: {
+        id: {
+          type: GraphQLNonNull(GraphQLID),
+        },
+      },
+      resolve: (_, args, context) => {
+        const { id } = fromGlobalId(args.id);
+        return NoteLoader.load(context, id);
+      },
+    },
     users: {
       type: UserConnection.connectionType,
       args: {
@@ -58,13 +71,7 @@ export default new GraphQLObjectType({
           type: GraphQLString,
         },
       },
-      resolve: (_, args, context) => {
-        if (!context.user) {
-          return null;
-        }
-
-        return CategoryLoader.loadCategoriesByCreator(context, args);
-      },
+      resolve: (_, args, context) => (context.user ? CategoryLoader.loadCategoriesByCreator(context, args) : null),
     },
     categories: {
       type: CategoryConnection.connectionType,
@@ -75,6 +82,26 @@ export default new GraphQLObjectType({
         },
       },
       resolve: (_, args, context) => CategoryLoader.loadCategories(context, args),
+    },
+    notesMe: {
+      type: NoteConnection.connectionType,
+      args: {
+        ...connectionArgs,
+        search: {
+          type: GraphQLString,
+        },
+      },
+      resolve: (_, args, context) => NoteLoader.loadMeNotes(context, args),
+    },
+    notes: {
+      type: NoteConnection.connectionType,
+      args: {
+        ...connectionArgs,
+        search: {
+          type: GraphQLString,
+        },
+      },
+      resolve: (_, args, context) => NoteLoader.loadNotes(context, args),
     },
   }),
 });
