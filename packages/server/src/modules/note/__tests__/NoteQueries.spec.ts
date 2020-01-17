@@ -196,3 +196,42 @@ it('should search for my notes', async () => {
   expect(result.errors).toBeUndefined();
   expect(data.notesMe.edges).toHaveLength(2);
 });
+
+it('should filter my notes by categories', async () => {
+  const user = await createUser();
+  const user2 = await createUser();
+  const category = await createCategory({ createdBy: user._id });
+  const category2 = await createCategory({ createdBy: user._id });
+  await createNote({ author: user._id, categories: [category._id, category2._id], title: 'anything' });
+  await createNote({ author: user._id, categories: [category._id, category2._id], text: 'anything 123' });
+  await createNote({ author: user._id, categories: [category._id] });
+  await createNote({ author: user2._id, categories: [category._id, category2._id], text: 'anything' });
+
+  // language=GraphQL
+  const query = `
+    query ($categories: [String]) {
+      notesMe(first: 10, categories: $categories) {
+        edges {
+          node {
+            title
+            text
+            categories {
+              name
+            }
+          }
+        }
+      }
+    }
+  `;
+
+  const rootQuery = {};
+  const context = await getContext({ user });
+  const variables = {
+    categories: [category._id.toString(), category2._id.toString()],
+  };
+  const result = await graphql(schema, query, rootQuery, context, variables);
+  const { data } = result;
+
+  expect(result.errors).toBeUndefined();
+  expect(data.notesMe.edges).toHaveLength(2);
+});

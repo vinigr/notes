@@ -78,6 +78,7 @@ export const clearAndPrimeCache = (context: GraphQLContext, id: Types.ObjectId, 
 
 type NoteArgs = ConnectionArguments & {
   search?: string;
+  categories?: Array<string>;
 };
 
 export const loadMeNotes = async (context: GraphQLContext, args: NoteArgs) => {
@@ -104,6 +105,10 @@ export const loadMeNotes = async (context: GraphQLContext, args: NoteArgs) => {
     };
 
     where = Object.assign(where, searchRegex);
+  }
+
+  if (args.categories) {
+    Object.assign(where, { categories: { $all: args.categories } });
   }
 
   const notes = NoteModel.find(where, { _id: 1 }).sort({ createdAt: -1 });

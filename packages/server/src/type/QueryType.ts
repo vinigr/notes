@@ -1,4 +1,4 @@
-import { GraphQLObjectType, GraphQLString, GraphQLNonNull, GraphQLID } from 'graphql';
+import { GraphQLObjectType, GraphQLString, GraphQLNonNull, GraphQLID, GraphQLList } from 'graphql';
 import { connectionArgs, fromGlobalId } from 'graphql-relay';
 
 import UserType, { UserConnection } from '../modules/user/UserType';
@@ -89,6 +89,9 @@ export default new GraphQLObjectType({
         ...connectionArgs,
         search: {
           type: GraphQLString,
+        },
+        categories: {
+          type: GraphQLList(GraphQLString),
         },
       },
       resolve: (_, args, context) => NoteLoader.loadMeNotes(context, args),
