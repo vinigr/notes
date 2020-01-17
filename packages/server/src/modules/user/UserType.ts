@@ -12,7 +12,7 @@ const UserType = registerType(
       id: globalIdField('User'),
       _id: {
         type: GraphQLString,
-        resolve: user => user._id,
+        resolve: user => user._id.toString(),
       },
       name: {
         type: GraphQLString,
