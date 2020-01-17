@@ -31,6 +31,7 @@ class MongoDbEnvironment extends NodeEnvironment {
     this.global.__COUNTERS__ = {
       user: 0,
       category: 0,
+      note: 0,
     };
   }
 
