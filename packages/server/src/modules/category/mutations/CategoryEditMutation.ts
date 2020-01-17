@@ -58,7 +58,6 @@ const mutation = mutationWithClientMutationId({
       resolve: async ({ id }, args, context) => {
         const editCategory = await CategoryLoader.load(context, id);
 
-        console.log(editCategory);
         // Returns null if no node was loaded
         if (!editCategory) {
           return null;
