@@ -47,7 +47,7 @@ const mutation = mutationWithClientMutationId({
     };
   },
   outputFields: {
-    success: {
+    id: {
       type: GraphQLString,
       resolve: ({ id }) => id,
     },

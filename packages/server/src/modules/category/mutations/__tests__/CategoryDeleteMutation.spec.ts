@@ -24,7 +24,7 @@ it('should not delete category if user not authenticated', async () => {
   const query = `
     mutation m($id: String!) {
       CategoryDelete(input: { id: $id }) {
-        success
+        id
         error
       }
     } 
@@ -52,7 +52,7 @@ it('should not delete category if user not createdBy', async () => {
   const query = `
     mutation m($id: String!) {
       CategoryDelete(input: { id: $id }) {
-        success
+        id
         error
       }
     } 
@@ -79,7 +79,7 @@ it('should not delete category if id invalid', async () => {
   const query = `
     mutation m($id: String!) {
       CategoryDelete(input: { id: $id }) {
-        success
+        id
         error
       }
     } 
@@ -106,7 +106,7 @@ it('should not delete category if id not found', async () => {
   const query = `
     mutation m($id: String!) {
       CategoryDelete(input: { id: $id }) {
-        success
+        id
         error
       }
     } 
@@ -133,7 +133,7 @@ it('should delete if category was user createdBy', async () => {
   const query = `
     mutation m($id: String!) {
       CategoryDelete(input: { id: $id }) {
-        success
+        id
         error
       }
     } 
@@ -150,5 +150,5 @@ it('should delete if category was user createdBy', async () => {
 
   expect(result.errors).toBeUndefined();
   expect(data.CategoryDelete.error).toBeNull();
-  expect(data.CategoryDelete.success).toBe(category._id.toString());
+  expect(data.CategoryDelete.id).toBe(category._id.toString());
 });
