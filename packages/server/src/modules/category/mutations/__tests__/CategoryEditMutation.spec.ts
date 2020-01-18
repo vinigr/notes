@@ -109,6 +109,38 @@ it('should not edit category if id invalid', async () => {
   expect(data?.CategoryEdit.error).toBe('ID is invalid');
 });
 
+it('should not edit category if id not found', async () => {
+  const user = await createUser();
+  await createCategory({ createdBy: user._id });
+
+  // language graphQL
+  const query = `
+    mutation m($id: String!, $newName: String!) {
+      CategoryEdit(input: { id: $id, newName: $newName }) {
+        category {
+          node {
+            name
+          }
+        }
+        error
+      }
+    } 
+  `;
+
+  const rootQuery = {};
+  const context = await getContext({ user });
+  const variables = {
+    id: '53cb6b9b4f4ddef1ad47f943',
+    newName: 'test',
+  };
+
+  const result = await graphql(schema, query, rootQuery, context, variables);
+  const { data } = result;
+
+  expect(result.errors).toBeUndefined();
+  expect(data?.CategoryEdit.error).toBe('Category not found');
+});
+
 it('should edit if category was user createdBy', async () => {
   const user = await createUser();
   const category = await createCategory({ createdBy: user._id });

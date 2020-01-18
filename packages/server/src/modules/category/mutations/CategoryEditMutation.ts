@@ -38,6 +38,12 @@ const mutation = mutationWithClientMutationId({
 
     const category = await CategoryModel.findById(id);
 
+    if (!category) {
+      return {
+        error: 'Category not found',
+      };
+    }
+
     if (category?.createdBy.toString() !== user._id.toString()) {
       return {
         error: 'User not authorized',
