@@ -4,6 +4,8 @@ import mongoose from 'mongoose';
 
 import { GraphQLContext } from '../../../TypeDefinition';
 
+import pubSub, { EVENTS } from '../../../pubSub';
+
 import CategoryModel from '../CategoryModel';
 import { CategoryConnection } from '../CategoryType';
 import * as CategoryLoader from '../CategoryLoader';
@@ -68,6 +70,8 @@ const mutation = mutationWithClientMutationId({
         if (!editCategory) {
           return null;
         }
+
+        pubSub.publish(EVENTS.CATEGORY.EDITED, { CategoryEdited: { category: editCategory } });
 
         return {
           cursor: toGlobalId('Category', editCategory._id),
