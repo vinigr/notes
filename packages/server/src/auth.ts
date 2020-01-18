@@ -26,3 +26,13 @@ type UserType = {
 export function generateToken(user: UserType) {
   return `JWT ${jwt.sign({ id: user._id }, JWT_SECRET)}`;
 }
+
+export function getUserSubscription(token: string) {
+  if (!token) return { user: null };
+
+  const decodedToken = jwt.verify(token.substring(4), JWT_SECRET);
+
+  return {
+    user: decodedToken,
+  };
+}

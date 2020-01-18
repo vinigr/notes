@@ -3,6 +3,8 @@ import { mutationWithClientMutationId, toGlobalId } from 'graphql-relay';
 
 import { GraphQLContext } from '../../../TypeDefinition';
 
+import pubSub, { EVENTS } from '../../../pubSub';
+
 import CategoryModel from '../CategoryModel';
 import { CategoryConnection } from '../CategoryType';
 import * as CategoryLoader from '../CategoryLoader';
@@ -31,6 +33,8 @@ const mutation = mutationWithClientMutationId({
     });
 
     await category.save();
+
+    pubSub.publish(EVENTS.CATEGORY.ADDED, { CategoryAdded: { category } });
 
     return {
       id: category._id,
