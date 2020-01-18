@@ -4,6 +4,8 @@ import mongoose from 'mongoose';
 
 import { GraphQLContext } from '../../../TypeDefinition';
 
+import pubSub, { EVENTS } from '../../../pubSub';
+
 import CategoryModel from '../CategoryModel';
 
 const mutation = mutationWithClientMutationId({
@@ -41,6 +43,8 @@ const mutation = mutationWithClientMutationId({
     }
 
     await category?.remove();
+
+    pubSub.publish(EVENTS.CATEGORY.DELETED, { CategoryDeleted: { category } });
 
     return {
       id,
