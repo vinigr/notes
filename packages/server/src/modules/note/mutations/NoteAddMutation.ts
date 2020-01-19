@@ -1,6 +1,8 @@
 import { GraphQLNonNull, GraphQLString, GraphQLList } from 'graphql';
 import { mutationWithClientMutationId, toGlobalId } from 'graphql-relay';
 
+import pubSub, { EVENTS } from '../../../pubSub';
+
 import { NoteConnection } from '../NoteType';
 import * as NoteLoader from '../NoteLoader';
 
@@ -41,6 +43,8 @@ const mutation = mutationWithClientMutationId({
     });
 
     await note.save();
+
+    pubSub.publish(EVENTS.NOTE.ADDED, { NoteAdded: { note } });
 
     return {
       id: note._id,

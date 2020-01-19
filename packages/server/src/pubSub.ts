@@ -6,6 +6,9 @@ export const EVENTS = {
     EDITED: 'CATEGORY_EDITED',
     DELETED: 'CATEGORY_DELETED',
   },
+  NOTE: {
+    ADDED: 'NOTE_ADDED',
+  },
 };
 
 export default new PubSub();
