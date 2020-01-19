@@ -2,6 +2,8 @@ import { GraphQLNonNull, GraphQLString, GraphQLList } from 'graphql';
 import { mutationWithClientMutationId, toGlobalId } from 'graphql-relay';
 import mongoose from 'mongoose';
 
+import pubSub, { EVENTS } from '../../../pubSub';
+
 import { NoteConnection } from '../NoteType';
 import * as NoteLoader from '../NoteLoader';
 
@@ -63,6 +65,8 @@ const mutation = mutationWithClientMutationId({
     note.categories = [...new Set(categories)];
 
     await note.save();
+
+    pubSub.publish(EVENTS.NOTE.EDITED, { NoteEdited: { note } });
 
     return {
       id: note._id,
