@@ -9,6 +9,7 @@ export const EVENTS = {
   NOTE: {
     ADDED: 'NOTE_ADDED',
     EDITED: 'NOTE_EDITED',
+    DELETED: 'NOTE_DELETED',
   },
 };
 

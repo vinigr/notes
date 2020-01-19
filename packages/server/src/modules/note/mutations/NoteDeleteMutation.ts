@@ -2,6 +2,8 @@ import { GraphQLNonNull, GraphQLString } from 'graphql';
 import { mutationWithClientMutationId } from 'graphql-relay';
 import mongoose from 'mongoose';
 
+import pubSub, { EVENTS } from '../../../pubSub';
+
 import { GraphQLContext } from '../../../TypeDefinition';
 import NoteModel from '../NoteModel';
 
@@ -40,6 +42,8 @@ const mutation = mutationWithClientMutationId({
     }
 
     await note.remove();
+
+    pubSub.publish(EVENTS.NOTE.DELETED, { NoteDeleted: { note } });
 
     return {
       id,
