@@ -74,7 +74,7 @@ module.exports = {
   plugins: [
     new CleanWebpackPlugin(),
     new dotEnv({
-      path: './.env',
+      path: './.env.production',
     }),
     new HappyPack({
       id: 'js',

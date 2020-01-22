@@ -92,7 +92,7 @@ module.exports = {
       status: false,
     }),
     new dotEnv({
-      path: './.env',
+      path: './.env.local',
     }),
     new HappyPack({
       id: 'js',
