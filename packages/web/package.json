@@ -1,5 +1,31 @@
 {
   "name": "@todo/web",
   "version": "0.0.1",
-  "main": "index.js"
+  "main": "index.js",
+  "scripts": {
+    "start": "webpack --watch --progress --config webpack.config.js"
+  },
+  "dependencies": {
+    "@hot-loader/react-dom": "^16.11.0",
+    "core-js": "^3.6.4",
+    "react": "16.12.0",
+    "react-dom": "16.12.0",
+    "react-hot-loader": "^4.12.19"
+  },
+  "devDependencies": {
+    "@todo/babel-web": "*",
+    "babel-loader": "^8.0.6",
+    "clean-webpack-plugin": "^3.0.0",
+    "css-loader": "3.4.2",
+    "dotenv-webpack": "^1.7.0",
+    "file-loader": "^5.0.2",
+    "happypack": "^5.0.1",
+    "hard-source-webpack-plugin": "^0.13.1",
+    "html-webpack-plugin": "^3.2.0",
+    "style-loader": "^1.1.3",
+    "typescript": "^3.7.5",
+    "webpack": "^4.41.5",
+    "webpack-cli": "^3.3.10",
+    "webpack-plugin-serve": "0.12.1"
+  }
 }
