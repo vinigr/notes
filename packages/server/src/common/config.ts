@@ -23,3 +23,11 @@ export const GRAPHQL_PORT = ENV.GRAPHQL_PORT || 5001;
 export const MONGO_URL = ENV.MONGO_URL || 'mongodb://localhost/database';
 
 export const JWT_SECRET = ENV.JWT_KEY || 'secret_key';
+
+export const PROJECT = {
+  // server
+  GRAPHQL_SCHEMA_FILE: ENV.GRAPHQL_SCHEMA_FILE || './schemas/graphql/schema.graphql',
+
+  // web, app
+  GRAPHQL: ENV.GRAPHQL || 'graphql',
+};

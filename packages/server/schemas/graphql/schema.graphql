@@ -1,0 +1,329 @@
+"""Category Data"""
+type Category implements Node {
+  """The ID of an object"""
+  id: ID!
+  _id: String
+  name: String
+  createdBy: User
+  createdAt: String
+  updatedAt: String
+}
+
+type CategoryAddedPayload {
+  categoryEdge: CategoryEdge
+}
+
+input CategoryAddInput {
+  name: String!
+  clientMutationId: String
+}
+
+type CategoryAddPayload {
+  category: CategoryEdge
+  error: String
+  clientMutationId: String
+}
+
+"""A connection to a list of items."""
+type CategoryConnection {
+  """Number of items in this connection"""
+  count: Int!
+
+  """
+  A count of the total number of objects in this connection, ignoring pagination.
+    This allows a client to fetch the first five objects by passing "5" as the
+    argument to "first", then fetch the total count so it could display "5 of 83",
+    for example.
+  """
+  totalCount: Int!
+
+  """Offset from start"""
+  startCursorOffset: Int!
+
+  """Offset till end"""
+  endCursorOffset: Int!
+
+  """Information to aid in pagination."""
+  pageInfo: PageInfoExtended!
+
+  """A list of edges."""
+  edges: [CategoryEdge]!
+}
+
+type CategoryDeletedPayload {
+  id: String
+}
+
+input CategoryDeleteInput {
+  id: String!
+  clientMutationId: String
+}
+
+type CategoryDeletePayload {
+  id: String
+  error: String
+  clientMutationId: String
+}
+
+"""An edge in a connection."""
+type CategoryEdge {
+  """The item at the end of the edge"""
+  node: Category!
+
+  """A cursor for use in pagination"""
+  cursor: String!
+}
+
+type CategoryEditedPayload {
+  categoryEdge: CategoryEdge
+}
+
+input CategoryEditInput {
+  id: String!
+  newName: String!
+  clientMutationId: String
+}
+
+type CategoryEditPayload {
+  category: CategoryEdge
+  error: String
+  clientMutationId: String
+}
+
+type Mutation {
+  UserRegisterWithEmail(input: UserRegisterWithEmailInput!): UserRegisterWithEmailPayload
+  UserLoginWithEmail(input: UserLoginWithEmailInput!): UserLoginWithEmailPayload
+  UserChangePassword(input: UserChangePasswordInput!): UserChangePasswordPayload
+  CategoryAdd(input: CategoryAddInput!): CategoryAddPayload
+  CategoryDelete(input: CategoryDeleteInput!): CategoryDeletePayload
+  CategoryEdit(input: CategoryEditInput!): CategoryEditPayload
+  NoteAdd(input: NoteAddInput!): NoteAddPayload
+  NoteEdit(input: NoteEditInput!): NoteEditPayload
+  NoteDelete(input: NoteDeleteInput!): NoteDeletePayload
+}
+
+"""An object with an ID"""
+interface Node {
+  """The id of the object."""
+  id: ID!
+}
+
+"""Note Data"""
+type Note implements Node {
+  """The ID of an object"""
+  id: ID!
+  _id: String
+  title: String
+  text: String!
+  categories: [Category]!
+  author: User
+}
+
+type NoteAddedPayload {
+  noteEdge: NoteEdge
+}
+
+input NoteAddInput {
+  title: String
+  text: String!
+  categories: [String!]
+  clientMutationId: String
+}
+
+type NoteAddPayload {
+  note: NoteEdge
+  error: String
+  clientMutationId: String
+}
+
+"""A connection to a list of items."""
+type NoteConnection {
+  """Number of items in this connection"""
+  count: Int!
+
+  """
+  A count of the total number of objects in this connection, ignoring pagination.
+    This allows a client to fetch the first five objects by passing "5" as the
+    argument to "first", then fetch the total count so it could display "5 of 83",
+    for example.
+  """
+  totalCount: Int!
+
+  """Offset from start"""
+  startCursorOffset: Int!
+
+  """Offset till end"""
+  endCursorOffset: Int!
+
+  """Information to aid in pagination."""
+  pageInfo: PageInfoExtended!
+
+  """A list of edges."""
+  edges: [NoteEdge]!
+}
+
+type NoteDeletedPayload {
+  id: String
+}
+
+input NoteDeleteInput {
+  id: String!
+  clientMutationId: String
+}
+
+type NoteDeletePayload {
+  id: String
+  error: String
+  clientMutationId: String
+}
+
+"""An edge in a connection."""
+type NoteEdge {
+  """The item at the end of the edge"""
+  node: Note!
+
+  """A cursor for use in pagination"""
+  cursor: String!
+}
+
+type NoteEditedPayload {
+  noteEdge: NoteEdge
+}
+
+input NoteEditInput {
+  id: String!
+  title: String
+  text: String!
+  categories: [String!]
+  clientMutationId: String
+}
+
+type NoteEditPayload {
+  note: NoteEdge
+  error: String
+  clientMutationId: String
+}
+
+"""Information about pagination in a connection."""
+type PageInfoExtended {
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
+
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: String
+
+  """When paginating forwards, the cursor to continue."""
+  endCursor: String
+}
+
+"""The root of all... queries"""
+type Query {
+  """Fetches an object given its ID"""
+  node(
+    """The ID of an object"""
+    id: ID!
+  ): Node
+  me: User
+  user(id: ID!): User
+  category(id: ID!): Category
+  note(id: ID!): Note
+  users(after: String, first: Int, before: String, last: Int, search: String): UserConnection
+  categoriesByCreator(after: String, first: Int, before: String, last: Int, search: String): CategoryConnection
+  categories(after: String, first: Int, before: String, last: Int, search: String): CategoryConnection
+  notesMe(after: String, first: Int, before: String, last: Int, search: String, categories: [String]): NoteConnection
+  notes(after: String, first: Int, before: String, last: Int, search: String): NoteConnection
+}
+
+type Subscription {
+  CategoryAdded: CategoryAddedPayload
+  CategoryEdited: CategoryEditedPayload
+  CategoryDeleted: CategoryDeletedPayload
+  NoteAdded: NoteAddedPayload
+  NoteEdited: NoteEditedPayload
+  NoteDeleted: NoteDeletedPayload
+}
+
+"""User Data"""
+type User implements Node {
+  """The ID of an object"""
+  id: ID!
+  _id: String
+  name: String
+  email: String
+  active: Boolean
+}
+
+input UserChangePasswordInput {
+  oldPassword: String!
+  password: String!
+  clientMutationId: String
+}
+
+type UserChangePasswordPayload {
+  error: String
+  me: User
+  clientMutationId: String
+}
+
+"""A connection to a list of items."""
+type UserConnection {
+  """Number of items in this connection"""
+  count: Int!
+
+  """
+  A count of the total number of objects in this connection, ignoring pagination.
+    This allows a client to fetch the first five objects by passing "5" as the
+    argument to "first", then fetch the total count so it could display "5 of 83",
+    for example.
+  """
+  totalCount: Int!
+
+  """Offset from start"""
+  startCursorOffset: Int!
+
+  """Offset till end"""
+  endCursorOffset: Int!
+
+  """Information to aid in pagination."""
+  pageInfo: PageInfoExtended!
+
+  """A list of edges."""
+  edges: [UserEdge]!
+}
+
+"""An edge in a connection."""
+type UserEdge {
+  """The item at the end of the edge"""
+  node: User!
+
+  """A cursor for use in pagination"""
+  cursor: String!
+}
+
+input UserLoginWithEmailInput {
+  email: String!
+  password: String!
+  clientMutationId: String
+}
+
+type UserLoginWithEmailPayload {
+  token: String
+  error: String
+  clientMutationId: String
+}
+
+input UserRegisterWithEmailInput {
+  name: String!
+  email: String!
+  password: String!
+  clientMutationId: String
+}
+
+type UserRegisterWithEmailPayload {
+  token: String
+  error: String
+  clientMutationId: String
+}
