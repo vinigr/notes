@@ -107,7 +107,7 @@ export const loadMeNotes = async (context: GraphQLContext, args: NoteArgs) => {
     where = Object.assign(where, searchRegex);
   }
 
-  if (args.categories) {
+  if (args.categories?.length > 0) {
     Object.assign(where, { categories: { $all: args.categories } });
   }
 
