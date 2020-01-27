@@ -20,7 +20,7 @@ const fetchQuery = async (
   uploadables: UploadableMap | null,
 ) => {
   const body = getRequestBody(request, variables, uploadables);
-  const token = localStorage.getItem(ACCESS_TOKEN);
+  const token = localStorage.getItem(ACCESS_TOKEN) || sessionStorage.getItem(ACCESS_TOKEN);
 
   const headers = {
     appplatform: PLATFORM.WEB,
