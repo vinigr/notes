@@ -1,25 +1,34 @@
 import mongoose, { Document, Model } from 'mongoose';
 
-const schema = new mongoose.Schema({
-  title: {
-    type: String,
-  },
-  text: {
-    type: String,
-    required: true,
-  },
-  categories: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'Category',
+const schema = new mongoose.Schema(
+  {
+    title: {
+      type: String,
     },
-  ],
-  author: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
-    required: true,
+    text: {
+      type: String,
+      required: true,
+    },
+    categories: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Category',
+      },
+    ],
+    author: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User',
+      required: true,
+    },
   },
-});
+  {
+    timestamps: {
+      createdAt: 'createdAt',
+      updatedAt: 'updatedAt',
+    },
+    collection: 'note',
+  },
+);
 
 export interface INote extends Document {
   title: string | null;

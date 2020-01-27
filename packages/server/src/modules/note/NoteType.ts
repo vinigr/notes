@@ -46,6 +46,14 @@ const NoteType = registerType(
           return null;
         },
       },
+      createdAt: {
+        type: GraphQLString,
+        resolve: ({ createdAt }) => (createdAt ? createdAt.toISOString() : null),
+      },
+      updatedAt: {
+        type: GraphQLString,
+        resolve: ({ updatedAt }) => (updatedAt ? updatedAt.toISOString() : null),
+      },
     }),
     interfaces: () => [nodeInterface],
   }),
