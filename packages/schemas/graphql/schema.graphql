@@ -117,6 +117,8 @@ type Note implements Node {
   text: String!
   categories: [Category]!
   author: User
+  createdAt: String
+  updatedAt: String
 }
 
 type NoteAddedPayload {
