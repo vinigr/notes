@@ -4,6 +4,8 @@ import fetchWithRetries from './fetchWithRetries';
 
 import { getHeaders, getRequestBody, handleData, isMutation } from './helpers';
 
+const ACCESS_TOKEN = 'NOTE_APP';
+
 export const PLATFORM = {
   APP: 'APP',
   WEB: 'WEB',
@@ -18,12 +20,12 @@ const fetchQuery = async (
   uploadables: UploadableMap | null,
 ) => {
   const body = getRequestBody(request, variables, uploadables);
-  const token = localStorage.getItem('token');
+  const token = localStorage.getItem(ACCESS_TOKEN);
 
   const headers = {
     appplatform: PLATFORM.WEB,
     ...getHeaders(uploadables),
-    authorization: token ? `JWT ${token}` : null,
+    authorization: token ? token : null,
   };
 
   try {
