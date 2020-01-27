@@ -11,17 +11,20 @@
     "@hot-loader/react-dom": "^16.11.0",
     "@todo/relay-web": "*",
     "core-js": "^3.6.4",
+    "date-fns": "^2.9.0",
     "graphql": "^14.5.8",
     "history": "^4.10.1",
     "jwt-decode": "^2.2.0",
     "react": "16.12.0",
+    "react-debounce-input": "^3.2.2",
     "react-dom": "16.12.0",
     "react-helmet": "^5.2.1",
     "react-hot-loader": "^4.12.19",
     "react-relay": "8.0.0",
     "react-router-dom": "^5.1.2",
     "relay-runtime": "8.0.0",
-    "styled-components": "^5.0.0"
+    "styled-components": "^5.0.0",
+    "styled-icons": "^9.2.0"
   },
   "devDependencies": {
     "@todo/babel-web": "*",
