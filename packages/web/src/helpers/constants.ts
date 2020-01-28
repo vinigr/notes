@@ -6,3 +6,5 @@ export const ROUTE_REGISTER = '/register';
 export const ROUTE_HOME = '/notes';
 
 export const ROUTE_NOTE = '/note/:id';
+
+export const ROUTE_CREATE_NOTE = '/create-note';
