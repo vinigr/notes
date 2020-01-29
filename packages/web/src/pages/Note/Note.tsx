@@ -2,14 +2,18 @@ import React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { hot } from 'react-hot-loader/root';
 import { RouteComponentProps } from 'react-router-dom';
-import ReactMarkdown from 'react-markdown';
+
 import styled from 'styled-components';
 import { TimeFive } from 'styled-icons/boxicons-regular/TimeFive';
 import format from 'date-fns/format';
 
 import { createQueryRenderer } from '@todo/relay-web';
 
+import SEO from '../../SEO';
+
 import { Note_query } from './__generated__/Note_query.graphql';
+
+import NoteText from './NoteText';
 
 interface PropsRouter {
   id: string;
@@ -33,6 +37,7 @@ const NoteContent = styled.article`
 `;
 
 const NoteTitle = styled.h1`
+  font-size: 26px;
   margin: 0 0 10px;
 `;
 
@@ -50,7 +55,9 @@ const NoteDate = styled.span`
   color: #8e8e8e;
 `;
 
-const NoteCategories = styled.div``;
+const NoteCategories = styled.div`
+  margin-bottom: 10px;
+`;
 
 const Category = styled.button<{ active: boolean }>`
   padding: 8px;
@@ -71,18 +78,19 @@ const Note: React.FC = ({ query }: Props) => {
   const { note } = query;
   return (
     <NoteWrapper>
+      <SEO title={note?.title} url={`/note/${note?.id}`} />
       <NoteContent>
         <NoteTitle>{note?.title}</NoteTitle>
         <NoteDate>
           <TimeFiveIcon />
-          {format(new Date(note.updatedAt), 'HH:mm | dd MMM yyyy')}
+          {format(new Date(note?.updatedAt), 'HH:mm | dd MMM yyyy')}
         </NoteDate>
         <NoteCategories>
-          {note.categories.map(category => (
-            <Category key={category._id}>{category.name}</Category>
+          {note?.categories.map(category => (
+            <Category key={category?._id}>{category?.name}</Category>
           ))}
         </NoteCategories>
-        <ReactMarkdown source={note?.text.replace(/\u21b5/g, '\n')} />
+        <NoteText text={note?.text} />
       </NoteContent>
     </NoteWrapper>
   );
