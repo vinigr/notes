@@ -135,7 +135,7 @@ const NoteList = ({ query, relay }: Props) => {
         <NoteTitle>{node.title}</NoteTitle>
         <NoteDate>
           <TimeFiveIcon />
-          {format(new Date(note.updatedAt), 'HH:mm | dd MMM yyyy')}
+          {format(new Date(node.updatedAt), 'HH:mm | dd MMM yyyy')}
         </NoteDate>
         <Categories>
           {node.categories.map(category => (
