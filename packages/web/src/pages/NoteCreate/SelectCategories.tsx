@@ -56,14 +56,16 @@ const SelectCategories = ({ query, relay, onChange }: Props) => {
 
     const onCompleted = (response: CategoryAddMutationResponse) => {
       setLoading(false);
-      setLoading(false);
+
       if (!response.CategoryAdd) return;
 
       const { error, category } = response.CategoryAdd;
 
-      setCategories([{ value: category?.node._id, label: category?.node.name }, ...categories]);
-
       error && setError(error);
+
+      if (category) {
+        setCategories([{ value: category?.node._id, label: category?.node.name }, ...categories]);
+      }
     };
 
     const onError = () => {
