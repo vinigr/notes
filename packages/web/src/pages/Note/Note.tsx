@@ -32,7 +32,7 @@ const NoteWrapper = styled.div`
 
 const NoteContent = styled.article`
   width: 90%;
-  min-width: 400px;
+  min-width: 250px;
   max-width: 600px;
 `;
 

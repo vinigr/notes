@@ -16,14 +16,13 @@ const Wrapper = styled.div`
   ol {
     color: #000;
     font-size: 1.25rem;
-    font-weight: 300;
     line-height: 1.7;
     letter-spacing: 0.069rem;
     padding: 0 0.5rem;
   }
 
   p {
-    margin: 0 0 1.6rem;
+    margin: 0 0 0.4rem;
   }
 
   h1,
