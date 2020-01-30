@@ -22,3 +22,9 @@ const isTokenExpired = token => {
     return false;
   }
 };
+
+export const logout = () => {
+  localStorage.removeItem(ACCESS_TOKEN);
+  sessionStorage.removeItem(ACCESS_TOKEN);
+  return;
+};
