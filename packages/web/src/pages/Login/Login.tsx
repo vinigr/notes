@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import styled from 'styled-components';
 import { Link, useHistory } from 'react-router-dom';
 
 import SEO from '../../SEO';
 
 import { login } from '../../helpers/auth';
+
+import Context from '../../core/context';
 
 import Input from '../../components/Input';
 import ButtonAuth from '../../components/ButtonAuth';
@@ -31,6 +33,7 @@ const Login: React.FC = () => {
   const [error, setError] = useState();
 
   const history = useHistory();
+  const { handleLogged } = useContext(Context);
 
   const handleLogin = e => {
     e.preventDefault();
@@ -58,6 +61,7 @@ const Login: React.FC = () => {
       if (token) {
         login(token, rememberMe);
         history.push(ROUTE_HOME);
+        handleLogged();
       }
     };
 

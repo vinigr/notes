@@ -8,12 +8,16 @@ import { Environment } from '@todo/relay-web';
 
 import App from './App';
 
+import ContextProvider from './core/ContextProvider';
+
 const rootEl = document.getElementById('root');
 
 if (rootEl) {
   ReactDOM.render(
     <RelayEnvironmentProvider environment={Environment}>
-      <App />
+      <ContextProvider>
+        <App />
+      </ContextProvider>
     </RelayEnvironmentProvider>,
     rootEl,
   );
