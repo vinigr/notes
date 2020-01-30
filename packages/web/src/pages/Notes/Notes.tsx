@@ -155,7 +155,7 @@ const NoteList = ({ query, relay }: Props) => {
 
   return (
     <Wrapper>
-      <SEO title={'Notes'} url={'/notes'} />
+      <SEO title={'Notes'} url={'/'} />
       <Search onChange={e => handleSearch(e.target.value)} />
       <ListWrapper>
         {notesMe && Array.isArray(notesMe.edges) && notesMe.edges.length > 0

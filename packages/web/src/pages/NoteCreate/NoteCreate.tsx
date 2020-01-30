@@ -4,6 +4,8 @@ import { draftToMarkdown } from 'markdown-draft-js';
 import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
 
+import SEO from '../../SEO';
+
 import SelectCategories from './SelectCategories';
 
 import Editor from './EditorText';
@@ -111,6 +113,7 @@ const NoteCreate = () => {
   return (
     <Wrapper>
       <Form>
+        <SEO title={'New Note'} url={`/create-note`} />
         <Input type="text" placeholder="title" value={title} onChange={e => setTitle(e.target.value)} />
         <SelectCategories onChange={option => setCategories(option)} />
         <Editor onEditorStateChange={onEditorStateChange} />
