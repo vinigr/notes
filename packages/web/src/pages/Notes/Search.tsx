@@ -5,7 +5,7 @@ import styled from 'styled-components';
 
 const Input = styled(DebounceInput)`
   width: calc(90% - 20px);
-  min-width: 380px;
+  min-width: 250px;
   max-width: 580px;
   padding: 16px 10px;
   margin-top: 10px;

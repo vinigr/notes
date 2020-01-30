@@ -25,7 +25,7 @@ const Wrapper = styled.div`
 const ListWrapper = styled.ul`
   display: flex;
   width: 90%;
-  min-width: 400px;
+  min-width: 250px;
   max-width: 600px;
   flex-direction: column;
   list-style-type: none;
