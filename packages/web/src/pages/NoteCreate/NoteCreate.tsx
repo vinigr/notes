@@ -115,7 +115,7 @@ const NoteCreate = () => {
       <Form>
         <SEO title={'New Note'} url={`/create-note`} />
         <Input type="text" placeholder="title" value={title} onChange={e => setTitle(e.target.value)} />
-        <SelectCategories onChange={option => setCategories(option)} />
+        <SelectCategories onChange={option => setCategories(option)} categoriesSelected={categories} />
         <Editor onEditorStateChange={onEditorStateChange} />
         <ButtonCreate onClick={e => create(e)}>Create</ButtonCreate>
         {error && <h3>{error}</h3>}

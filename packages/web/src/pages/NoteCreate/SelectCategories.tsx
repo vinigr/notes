@@ -12,7 +12,8 @@ import { CategoryAddMutationResponse } from './__generated__/CategoryAddMutation
 interface Props {
   query: SelectCategories_query;
   relay: any;
-  onChange: (newValue: any, actionMeta: any) => void;
+  onChange: (newValue: any) => void;
+  categoriesSelected: Array<ICategory> | null;
 }
 
 interface ICategory {
@@ -20,7 +21,7 @@ interface ICategory {
   label: string;
 }
 
-const SelectCategories = ({ query, relay, onChange }: Props) => {
+const SelectCategories = ({ query, relay, onChange, categoriesSelected }: Props) => {
   const [categories, setCategories] = useState<ICategory[]>([]);
   const [loading, setLoading] = useState();
   const [error, setError] = useState();
@@ -40,6 +41,7 @@ const SelectCategories = ({ query, relay, onChange }: Props) => {
     if (input.length < 3) {
       return;
     }
+
     const refetchVariables = () => ({
       first: 10,
       search: input,
@@ -55,8 +57,6 @@ const SelectCategories = ({ query, relay, onChange }: Props) => {
     };
 
     const onCompleted = (response: CategoryAddMutationResponse) => {
-      setLoading(false);
-
       if (!response.CategoryAdd) return;
 
       const { error, category } = response.CategoryAdd;
@@ -65,7 +65,9 @@ const SelectCategories = ({ query, relay, onChange }: Props) => {
 
       if (category) {
         setCategories([{ value: category?.node._id, label: category?.node.name }, ...categories]);
+        onChange([...categoriesSelected, { value: category?.node._id, label: category?.node.name }]);
       }
+      setLoading(false);
     };
 
     const onError = () => {
@@ -80,12 +82,14 @@ const SelectCategories = ({ query, relay, onChange }: Props) => {
 
   return (
     <CreatableSelect
+      isClearable
       onChange={onChange}
       onCreateOption={e => createCategory(e)}
       options={categories}
       isLoading={loading}
       isMulti
       placeholder="select categories..."
+      value={categoriesSelected}
       onInputChange={handleInputChange}
     />
   );
