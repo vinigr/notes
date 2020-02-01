@@ -7,7 +7,14 @@
   "workspaces": {
     "packages": [
       "packages/*"
+    ],
+    "nohoist": [
+      "**/react-native",
+      "**/react-native/**"
     ]
+  },
+  "scripts": {
+    "web": "yarn workspace @todo/web start"
   },
   "devDependencies": {
     "@commitlint/cli": "^8.2.0",
